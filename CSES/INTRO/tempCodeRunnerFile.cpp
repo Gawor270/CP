@@ -1,0 +1,2 @@
+tc;
+    for (int t 
