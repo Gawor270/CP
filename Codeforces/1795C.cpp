@@ -1,7 +1,8 @@
 #include <bits/stdc++.h>
-#include <iostream>
 
 using namespace std;
+
+#define debug(x) cout << "[" <<  #x << " " << x << "] ";
 
 #define ar array
 #define ll long long
@@ -22,25 +23,29 @@ const ld EPS = 1e-9;
 void solve() {
     int n;
     cin >> n;
-    vi a(n),b(n);
-    vector<ll> res(n);
+    vector<ll> a(n), b(n), offs(n+1,0),add(n+1,0);
     for(auto&x : a)cin >> x;
     for(auto&x : b)cin >> x;
-
-
-    ll remain = 0;
-    for(int i=n-1; i>=0; i--){
-        ll tmp = (ll)a[i]+ remain - (ll)b[i];
-        if(tmp <= 0){
-            res[i] = (ll)a[i] + remain;
-            remain = 0;
-        }
-        else{
-            
-        }   
+    vector<ll> prefsum(n+1);
+    prefsum[0] = 0;
+    for(int i=1; i<=n; i++){
+        prefsum[i] = prefsum[i-1] + b[i-1];
     }
 
-    for(auto&x : res)cout << x << " ";
+    for(int i=0; i<n; i++){
+        vector<ll>::iterator pos = lower_bound(prefsum.begin(),prefsum.end(),a[i] + prefsum[i]);
+        int ind = distance(prefsum.begin()+1,pos);
+        add[i]++;
+        add[ind]--;
+        if(ind < n)offs[ind] += min(b[ind],(a[i]+prefsum[i]) - *(pos-1));
+    }
+
+    for(int i=1; i<=n; i++){
+        add[i] += add[i-1];
+    }
+    for(int i=0; i<n; i++){
+        cout << add[i]*b[i] + offs[i] << " ";
+    }
     cout << "\n";
 }
 
@@ -48,7 +53,6 @@ int main() {
     ios_base::sync_with_stdio(0);
     cin.tie(0); cout.tie(0);
     int tc = 1;
-    int n;
     cin >> tc;
     for (int t = 1; t <= tc; t++) {
         // cout << "Case #" << t << ": ";

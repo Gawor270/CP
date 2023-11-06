@@ -38,18 +38,12 @@ void solve() {
         maxsz++;
     }
     maxval >>= 1;
-    ll count = 0;
-    int i=l;
     int seg = maxval/l;
-    while(i <= r && seg*i <= r){
-        count = (count+1)%MOD;
-        if((seg/2)*i*3 <=r){
-            count = (count + maxsz-1)%MOD;
-        }
-        i++;
-    }
+    int amount1 = r/seg - l +1;
+    int amount2 = 0;
+    if(seg/2)amount2 = r/((seg/2)*3) - l +1;
 
-    cout << maxsz << " " << count << "\n";
+    cout << maxsz << " " << amount1 + (max(0,amount2))*(maxsz-1) << "\n";
 
 
 }
@@ -58,7 +52,6 @@ int main() {
     ios_base::sync_with_stdio(0);
     cin.tie(0); cout.tie(0);
     int tc = 1;
-    int n;
     cin >> tc;
     for (int t = 1; t <= tc; t++) {
         // cout << "Case #" << t << ": ";

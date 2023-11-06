@@ -22,7 +22,7 @@ void update(int v, int tl, int tr, int l, int r,int x){
 
     int md = (tl+tr)/2;
     update(2*v, tl, md, l, r, x);
-update(2*v+1, md+1, tr, l, r, x);
+    update(2*v+1, md+1, tr, l, r, x);
 }
 
 

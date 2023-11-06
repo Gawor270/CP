@@ -4,7 +4,7 @@
 using namespace std;
 
 const int MAXN = 1e7 + 7;
-const int K = 25;
+const int K = 25;// K = ceil(log2(MAXN))
 
 int st[K+1][MAXN];
 
@@ -15,11 +15,15 @@ int log2_floor(unsigned long long i) {
 void preprocess(){
     for(int i=1; i<=K; i++){
         for(int j=0; j + (1 << i) <=MAXN; j++){
-            st[i][j] = min(st[i-1][j], st[i-1][j + (1<<(i-1))]);
+            st[i][j] = min(st[i-1][j], st[i-1][j + (1<<(i-1))]);//instead of min chosen function
         }
     } 
 }
 
+int query(int b, int e) {
+    int k = log2_floor(b-e+1);
+    return min(st[k][b], st[k][e - (1 << k) + 1]);// same function as before
+}
 int main(){
     int N,Q;
     cin >> N;
@@ -29,8 +33,7 @@ int main(){
     while(Q--){
         int i,j;
         cin >> i >> j;
-        int k = log2_floor(j-i+1);
-        cout << min(st[k][i],st[k][j - (1<<k)+1]) << "\n";
+        cout << query(i, j) << "\n";
     }
 
     return 0;
