@@ -24,12 +24,9 @@ const ld EPS = 1e-9;
 void solve() {
     int a,b;
     cin >> a >> b;
-    if(!(a&1) && !(b&1)){
-        cout << "NO" << "\n";
-    }
-    else{
-        cout << "YES" << "\n";
-    }
+    if(a > b)swap(a,b);
+    int diff = 2*a - b;
+    cout << ((diff >=0 && diff%3 == 0) ? "YES\n" : "NO\n");
 }
 
 int main() {

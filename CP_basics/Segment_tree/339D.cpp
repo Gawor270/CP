@@ -1,6 +1,5 @@
 #include <bits/stdc++.h>
-#include <iostream>
-
+// https://codeforces.com/problemset/problem/339/D
 using namespace std;
 
 #define debug(x) cout << "[" <<  #x << " " << x << "] ";

@@ -1,15 +1,17 @@
 #include <bits/stdc++.h>
-#include <iostream>
 
 using namespace std;
 
-#define debug(x) cout << "[" <<  #x << " " << x << "] ";
+#define debug(x) cout << "[" <<  #x << " " << x << "] " << endl;
 
-#define ar array
 #define ll long long
 #define ld long double
-#define sz(x) ((int)x.size())
-#define all(a) (a).begin(), (a).end()
+
+#define REP(i,n) for(int i=0;i<(n);++i)
+#define FWD(i,a,b) for (int i=(a); i<(b); ++i)
+#define BCK(i,a,b) for (int i=(a); i>(b); --i)
+#define SIZE(c) ((int)((c).size()))
+#define ALL(u) (u).begin(),(u).end()
 
 typedef vector<int> vi;
 typedef pair<int,int> pi;
@@ -19,23 +21,34 @@ const ll MOD = 1e9 + 7;
 const ll INF = 1e9;
 const ld EPS = 1e-9;
 
+int getDigit(ll n, ll k){
+    string s = to_string(n);
+    return s[k] - '0';
+}
 
+ll qexp (ll a, ll b){
+    ll res = 1;
+    while(b){
+        if(b&1) res *= a;
+        a *= a;
+        b >>= 1;
+    }
+    return res;
+}
 
 void solve() {
-    int q;
     ll k;
-    while(q--){
-        cin >> k;
-        int fac = 1;
-        ll pow = 9;
-        while(k < pow){
-            k -= pow;
-            k *= 10;
-            fac++;
-        }
-        pow/=10;
-        
+    cin >> k;
+    ll num = 9;
+    ll dig = 1;
+    while(k > num*dig){
+        k -= num*dig;
+        num *= 10;
+        dig++;
     }
+    cout << getDigit(qexp(10,dig-1) + (k-1)/(dig),(k-1)%dig) << "\n";
+
+    
 }
 
 int main() {

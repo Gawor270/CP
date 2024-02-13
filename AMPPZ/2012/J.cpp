@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+// https://szkopul.edu.pl/problemset/problem/EMB5uNAIW1GVi_U23U-pqurR/site/
 
 using namespace std;
 

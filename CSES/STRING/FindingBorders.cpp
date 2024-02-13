@@ -1,5 +1,5 @@
 #include <bits/stdc++.h>
-
+// https://cses.fi/problemset/task/1732
 using namespace std;
 
 #define debug(x) cout << "[" <<  #x << " " << x << "] ";

@@ -19,33 +19,32 @@ const ll MOD = 1e9 + 7;
 const ll INF = 1e9;
 const ld EPS = 1e-9;
 
-bool bs[16];
 
-void printbs(int n){
-    for(int i=0; i<n;i++){
-        if(bs[i])cout << 1;
-        else cout << 0;
+vector<vector<bool>> grayCode = {{0},{1}};
+
+void setCode(int n){
+    if(n==1) return;
+    grayCode.resize(2*grayCode.size());
+    for(int i=0; i<grayCode.size()/2; i++){
+        grayCode[grayCode.size()-i-1] = grayCode[i];
+        grayCode[i].push_back(0);
+        grayCode[grayCode.size()-i-1].push_back(1);
     }
-    cout << '\n';
+    setCode(n-1);
 }
 
-void line(int n,int bound){
-    printbs(n);
-    bs[0] = 1;
-    printbs(n);
-    for(int i=1; i<bound; i++){
-        bs[i] = 1;
-        printbs(n);
-        bs[i-1] = 0;
-    }
-}
 
 void solve() {
     int n;
     cin >> n;
-    for(int i=n; i>0; i--){
-        line(n,i);
+    setCode(n);
+    for(auto v: grayCode){
+        for(auto b: v){
+            cout << (b ? 1 : 0);
+        }
+        cout << "\n";
     }
+
 }
 
 int main() {

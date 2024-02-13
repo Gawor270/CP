@@ -1,5 +1,5 @@
 #include <bits/stdc++.h>
-
+// https://szkopul.edu.pl/problemset/problem/rIPJGkprPFKvI8w_8-WObuIG/site/?key=statement
 using namespace std;
 
 #define debug(x) cout << "[" <<  #x << " " << x << "] ";
